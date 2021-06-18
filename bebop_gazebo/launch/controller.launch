@@ -12,7 +12,7 @@
   <rosparam ns="controller" file="$(find bebop_gazebo)/params/controller.yaml" />
   <rosparam file="$(find bebop_gazebo)/params/controller_params.yaml" />
 
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+  <node name="bebop_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
     $(arg controllers) --shutdown-timeout 3"/>
 
   <node name="estop_relay" pkg="topic_tools" type="relay" args="/estop estop">

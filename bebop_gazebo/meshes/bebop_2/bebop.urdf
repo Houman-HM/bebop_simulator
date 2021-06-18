@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<robot name="parrot_bebop_2">
+  <link name="parrot_bebop_2__body">
+    <inertial>
+      <mass value="0.503"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="1.805e-3" ixy="-8.619e-7" ixz="1.555e-5" iyy="1.764e-3" iyz="3.595e-7" izz="3.328e-3"/>
+    </inertial>
+    <collision name="parrot_bebop_2__collision">
+      <origin rpy="0 0 0" xyz="-0.00424  0.00013  0.0567"/>
+      <geometry>
+        <box size="0.316618 0.330564 0.089582"/>
+      </geometry>
+    </collision>
+    <visual name="parrot_bebop_2__hull">
+      <origin rpy="0 0 0" xyz="0      0      0.06265"/>
+      <geometry>
+        <mesh filename="package://bebop_gazebo/meshes/bebop_2/meshes/hull.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+    <visual name="parrot_bebop_2__propeller_rr">
+      <origin rpy="0 0 0" xyz="-0.09035 -0.11423  0.05764"/>
+      <geometry>
+        <mesh filename="package://bebop_gazebo/meshes/bebop_2/meshes/propeller_rr.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+    <visual name="parrot_bebop_2__propeller_rl">
+      <origin rpy="0 0 0" xyz="-0.09035  0.11452  0.05764"/>
+      <geometry>
+        <mesh filename="package://bebop_gazebo/meshes/bebop_2/meshes/propeller_rl.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+    <visual name="parrot_bebop_2__propeller_fr">
+      <origin rpy="0 0 0" xyz="0.08456 -0.11435  0.05764"/>
+      <geometry>
+        <mesh filename="package://bebop_gazebo/meshes/bebop_2/meshes/propeller_fr.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+    <visual name="parrot_bebop_2__propeller_fl">
+      <origin rpy="0 0 0" xyz="0.08456 0.11463 0.05764"/>
+      <geometry>
+        <mesh filename="package://bebop_gazebo/meshes/bebop_2/meshes/propeller_fl.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>

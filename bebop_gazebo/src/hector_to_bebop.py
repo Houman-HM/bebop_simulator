@@ -14,9 +14,9 @@ def init():
     landing_pub = rospy.Publisher("action/landing/goal", LandingActionGoal, queue_size=1);
     takeoff_pub = rospy.Publisher("action/takeoff/goal", TakeoffActionGoal, queue_size=1);
     emergency_pub = rospy.Publisher("action/emergency/goal", LandingActionGoal, queue_size=1);
-    rospy.Subscriber("bebop/land", Empty, landing_callback)
-    rospy.Subscriber("bebop/takeoff", Empty, takeoff_callback)
-    rospy.Subscriber("bebop/reset", Empty, emergency_callback)
+    rospy.Subscriber("land", Empty, landing_callback)
+    rospy.Subscriber("takeoff", Empty, takeoff_callback)
+    rospy.Subscriber("reset", Empty, emergency_callback)
     while not rospy.is_shutdown():
         rospy.spin()
 

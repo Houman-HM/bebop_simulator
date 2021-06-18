@@ -1,10 +1,10 @@
 topics:
 - name    : floatie
-  topic   : bebop_hover/cmd_vel
+  topic   : hover/cmd_vel
   timeout : 1.0
   priority: 1
 - name    : normal
-  topic   : bebop/cmd_vel
+  topic   : cmd_vel
   timeout : 0.5
   priority: 16
 

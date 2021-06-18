@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:arg name="prefix" default=""/>
+<xacro:property name= "prefix" value="$(arg prefix)"/>
 
   <!-- Quadrotor Sensor Plugins -->
   <xacro:macro name="bebop_sensors">
 
-    <gazebo reference="camera_base_link">
+    <gazebo reference="${prefix}camera_base_link">
       <sensor type="camera" name="bebop_camera_sensor">
-        <update_rate>30.0</update_rate>
+        <update_rate>50.0</update_rate>
         <camera name="front">
           <horizontal_fov>1.570796</horizontal_fov>
           <image>
@@ -21,23 +23,25 @@
           </clip>
         </camera>
         <plugin name="bebop_camera_controller" filename="libgazebo_ros_camera.so">
-        <cameraName>/bebop/camera</cameraName>
+        <cameraName>${prefix}camera</cameraName>
           <alwaysOn>true</alwaysOn>
-          <updateRate>30.0</updateRate>
-          <imageTopicName>/bebop/image_raw</imageTopicName>
-          <cameraInfoTopicName>/bebop/camera_info</cameraInfoTopicName>
-          <frameName>camera_optical</frameName>
+          <updateRate>50.0</updateRate>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>${prefix}camera_optical</frameName>
         </plugin>
       </sensor>
     </gazebo>
 
+    <xacro:property name="deg_to_rad" value="0.01745329251994329577" />
+
         <gazebo>
           <plugin name="bebop_gps_sim" filename="libhector_gazebo_ros_gps.so">
             <updateRate>4.0</updateRate>
-            <bodyName>base_link</bodyName>
-            <frameId>$(arg base_link_frame)</frameId>
-            <topicName>/bebop/fix</topicName>
-            <velocityTopicName>/bebop/fix_velocity</velocityTopicName>
+            <bodyName>${prefix}base_link</bodyName>
+            <frameId>${prefix}base_link</frameId>
+            <topicName>fix</topicName>
+            <velocityTopicName>fix_velocity</velocityTopicName>
             <referenceLatitude>37.9707</referenceLatitude>
             <referenceLongitude>23.7294</referenceLongitude>
             <drift>5.0 5.0 5.0</drift>
@@ -48,8 +52,8 @@
 
           <plugin name="bebop_groundtruth_sim" filename="libgazebo_ros_p3d.so">
             <updateRate>100.0</updateRate>
-            <bodyName>base_link</bodyName>
-            <topicName>/bebop/odom</topicName>
+            <bodyName>${prefix}base_link</bodyName>
+            <topicName>odom</topicName>
             <gaussianNoise>0.0</gaussianNoise>
             <frameName>$(arg world_frame)</frameName>
           </plugin>
