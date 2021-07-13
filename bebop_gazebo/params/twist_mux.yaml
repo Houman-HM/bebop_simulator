@@ -2,7 +2,7 @@ topics:
 - name    : floatie
   topic   : hover/cmd_vel
   timeout : 1.0
-  priority: 1
+  priority: 20
 - name    : normal
   topic   : cmd_vel
   timeout : 0.5
