@@ -10,8 +10,8 @@ You can see a tutorial [here](http://wiki.ros.org/Tutorials/Landing%20an%20auton
 * [hector_pose_estimation](https://github.com/tu-darmstadt-ros-pkg/hector_localization.git)
 * [hector_gazebo_plugins](https://github.com/tu-darmstadt-ros-pkg/hector_gazebo.git)
 * [realsense_gazebo_plugin](https://github.com/pal-robotics/realsense_gazebo_plugin.git)
-* [twist_mux]
-* [geographic_msgs]
+* twist_mux
+* geographic_msgs
 
 
 
