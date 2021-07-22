@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <env name="GAZEBO_MODEL_PATH" value="$(find bebop_gazebo)/meshes/bebop_2/:$GAZEBO_MODEL_PATH" />
+  <arg name="prefix" default="bebop_"/>
+
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+		<param name="resolution" value="0.05" />
+		
+		<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+		<param name="frame_id" type="string" value="world" />
+		
+		<!-- maximum range to integrate (speedup!) -->
+		<param name="sensor_model/max_range" value="5.0" />
+		
+		<!-- data source to integrate (PointCloud2) -->
+		<remap from="cloud_in" to="/realsense/depth/color/points" />
+	
+	</node>
+
+  <include file="$(find bebop_gazebo)/launch/spawn_bebop.launch">
+   <arg name="prefix" value="$(arg prefix)"/>
+  </include> 
+
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom" args="0 0 0 0 0 0 world $(arg prefix)odom 100" />
+
+</launch>
