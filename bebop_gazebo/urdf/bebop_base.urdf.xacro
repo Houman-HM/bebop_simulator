@@ -74,5 +74,9 @@
       <parent link="camera_tilt_link" />
       <child link="camera_optical" />
     </joint>
+
+    <gazebo reference="base_link">
+      <material>Gazebo/Black</material>
+    </gazebo>
   </xacro:macro>
 </robot>
