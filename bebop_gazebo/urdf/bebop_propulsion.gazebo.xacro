@@ -8,8 +8,8 @@
       <plugin name="bebop_propulsion" filename="libhector_gazebo_quadrotor_propulsion.so">
         <alwaysOn>true</alwaysOn>
         <updateRate>0.0</updateRate>
-        <bodyName>${prefix}base_link</bodyName>
-        <frameId>${prefix}base_link</frameId>
+        <bodyName>base_link</bodyName>
+        <frameId>$(arg base_link_frame)</frameId>
         <controlRate>100.0</controlRate>
         <controlTolerance>0.01</controlTolerance>
         <controlDelay>0.01</controlDelay>
