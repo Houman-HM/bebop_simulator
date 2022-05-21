@@ -8,7 +8,7 @@ yaw_tolerance: 0.35
 time_in_tolerance: 1.0
 
 landing_height: 0.1
-takeoff_height: 1.0
+takeoff_height: 3.0
 
 estop_deceleration: 1.0
 

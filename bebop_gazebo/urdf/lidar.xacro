@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lazDar">
+  <xacro:property name="base_radius" value="0.01"/>
+  <xacro:property name="base_height" value="0.01"/>
+  <xacro:property name="laz_radius" value="0.04"/>
+  <xacro:property name="laz_height" value="0.1"/>
+
+  <gazebo reference="laz_base">
+    <material>Gazebo/Grey</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <link name="laz_base">
+    <visual>
+      <geometry>
+        <cylinder length="${base_height}" radius="${base_radius}"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder length="${base_height}" radius="${base_radius}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.000000000001"/>
+      <inertia ixx="${(1/12) * 0.1 * (3 * base_radius * base_radius + base_height * base_height)}" ixy="0" ixz="0" iyy="${(1/12) * 0.1 * (3 * base_radius * base_radius + base_height * base_height)}" iyz="0" izz="${(1/2) * 0.1 * base_radius * base_radius}"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="laz_rot">
+    <material>Gazebo/RedGlow</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <link name="laz_rot">
+    <visual>
+      <geometry>
+        <cylinder length="${laz_height}" radius="${laz_radius}"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder length="${laz_height}" radius="${laz_radius}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.000000001"/>
+      <inertia ixx="${(1/12) * 0.1 * (3 * laz_radius * laz_radius + laz_height * laz_height)}" ixy="0" ixz="0" iyy="${(1/12) * 0.1 * (3 * laz_radius * laz_radius + laz_height * laz_height)}" iyz="0" izz="${(1/2) * 0.1 * laz_radius * laz_radius}"/>
+    </inertial>
+  </link>
+
+  <joint name="lazRot" type="continuous">
+    <parent link="laz_base"/>
+    <child link="laz_rot"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz = "0 0 ${base_height/2}"/>
+    <dynamics friction="0.1"/>
+  </joint>
+</robot>
