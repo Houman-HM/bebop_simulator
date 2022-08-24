@@ -12,9 +12,11 @@
   <xacro:property name="tilt_range" value="0.6108652381980153" />
   <xacro:property name="tilt_vel" value="2.0" />
   <xacro:property name="joint_effort" value="50" />
+  <xacro:arg name="prefix" default=""/>
+  <xacro:property name= "prefix" value="$(arg prefix)"/>
   <!-- Main quadrotor link -->
   <xacro:macro name="bebop_base_macro">
-    <link name="base_link">
+    <link name="${prefix}base_link">
       <inertial>
         <mass value="0.399" />
         <origin xyz="0 0 0" />
@@ -40,42 +42,42 @@
       </collision>
     </link>
 
-    <link name="camera_base_link"></link>
-    <link name="camera_pan_link"></link>
-    <link name="camera_tilt_link"></link>
-    <link name="camera_optical"></link>
+    <link name="${prefix}camera_base_link"></link>
+    <link name="${prefix}camera_pan_link"></link>
+    <link name="${prefix}camera_tilt_link"></link>
+    <link name="${prefix}camera_optical"></link>
 
-    <joint name="base_link_joint" type="fixed">
+    <joint name="${prefix}base_link_joint" type="fixed">
       <origin xyz="${camera_offset_len} 0 ${camera_offset_ver}" rpy="0 0 0" />
-      <parent link="base_link"/>
-      <child link="camera_base_link" />
+      <parent link="${prefix}base_link"/>
+      <child link="${prefix}camera_base_link" />
     </joint>
 
-    <joint name="camera_pan_joint" type="revolute">
+    <joint name="${prefix}camera_pan_joint" type="revolute">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="camera_base_link" />
-      <child link="camera_pan_link" />
+      <parent link="${prefix}camera_base_link" />
+      <child link="${prefix}camera_pan_link" />
       <axis xyz="0 0 1" />
       <limit lower="${-pan_range}" upper="${pan_range}"
         effort="${joint_effort}" velocity="${pan_vel}" />
     </joint>
 
-    <joint name="camera_tilt_joint" type="revolute">
+    <joint name="${prefix}camera_tilt_joint" type="revolute">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="camera_pan_link" />
-      <child link="camera_tilt_link" />
+      <parent link="${prefix}camera_pan_link" />
+      <child link="${prefix}camera_tilt_link" />
       <axis xyz="0 1 0" />
       <limit lower="${-tilt_range}" upper="${tilt_range}"
         effort="${joint_effort}" velocity="${tilt_vel}" />
     </joint>
 
-    <joint name="camera_optical_joint" type="fixed">
+    <joint name="${prefix}camera_optical_joint" type="fixed">
       <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
-      <parent link="camera_tilt_link" />
-      <child link="camera_optical" />
+      <parent link="${prefix}camera_tilt_link" />
+      <child link="${prefix}camera_optical" />
     </joint>
 
-    <gazebo reference="base_link">
+    <gazebo reference="${prefix}base_link">
       <material>Gazebo/Black</material>
     </gazebo>
   </xacro:macro>

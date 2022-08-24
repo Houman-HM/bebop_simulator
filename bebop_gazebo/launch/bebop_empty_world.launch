@@ -1,11 +1,11 @@
-<?xml version="1.0"?>
-
 <launch>
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
+  <arg name="prefix" default="bebop_"/>
+
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="paused" value="$(arg paused)"/>
@@ -15,5 +15,10 @@
     <arg name="debug" value="$(arg debug)"/>
   </include>
 
-  <include file="$(find bebop_gazebo)/launch/spawn_bebop.launch" />
-</launch>
+  <include file="$(find bebop_gazebo)/launch/spawn_bebop.launch">
+   <arg name="prefix" value="$(arg prefix)"/>
+  </include> 
+
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom" args="0 0 0 0 0 0 world $(arg prefix)odom 100" />
+
+  </launch>

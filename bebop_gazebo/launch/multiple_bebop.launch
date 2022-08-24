@@ -1,0 +1,52 @@
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="prefix_1" default="bebop_1_"/>
+  <arg name="prefix_2" default="bebop_2_"/>
+
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <group ns="bebop_1">
+
+    <include file="$(find bebop_gazebo)/launch/spawn_bebop.launch">
+      <arg name="prefix" value="$(arg prefix_1)"/>
+      <arg name="name" value="bebop_1"/>
+      <arg name="x" value="0.0"/>
+      <arg name="y" value="0.0"/>
+      <arg name="z" value="0.3"/>
+      <arg name="Y" value="0.0"/>
+    </include> 
+
+    <node pkg="tf" type="static_transform_publisher" name="world_to_odom" args="0 0 0 0 0 0 world $(arg prefix_1)odom 100" />
+
+  </group>
+
+  <group ns="bebop_2">
+
+  <include file="$(find bebop_gazebo)/launch/spawn_bebop.launch">
+    <arg name="prefix" value="$(arg prefix_2)"/>
+    <arg name="name" value="bebop_2"/>
+    <arg name="x" value="2.0"/>
+    <arg name="y" value="0.0"/>
+    <arg name="z" value="0.3"/>
+    <arg name="Y" value="0.0"/>
+  </include> 
+
+  <node pkg="tf" type="static_transform_publisher" name="world_to_odom" args="0 0 0 0 0 0 world $(arg prefix_2)odom 100" />
+  
+</group>
+
+
+
+
+</launch>

@@ -19,9 +19,11 @@
   <xacro:property name="base_height" value="0.05"/>
   <xacro:property name="laz_radius" value="0.04"/>
   <xacro:property name="laz_height" value="0.1"/>
+  <xacro:arg name="prefix" default=""/>
+  <xacro:property name= "prefix" value="$(arg prefix)"/>
   
   <!--Laser Scan-->
-  <link name="sensor_laser">
+  <link name="${prefix}sensor_laser">
     <visual>
       <geometry>
         <mesh filename="package://bebop_gazebo/meshes/hokuyo.dae"/>
@@ -40,9 +42,9 @@
     </inertial>
   </link>
 
-  <joint name="sensor_laser_joint" type="fixed">
+  <joint name="bebop_sensor_laser_joint" type="fixed">
     <origin xyz="${laser_origin_x} ${laser_origin_y} ${laser_origin_z}" rpy="0 0 0" />
-    <parent link="base_link"/>
-    <child link="sensor_laser" />
+    <parent link="${prefix}base_link"/>
+    <child link="${prefix}sensor_laser" />
   </joint>
 </robot>
