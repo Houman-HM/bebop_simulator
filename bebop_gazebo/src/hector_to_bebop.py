@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 from hector_uav_msgs.msg import LandingActionGoal
 from hector_uav_msgs.msg import TakeoffActionGoal
