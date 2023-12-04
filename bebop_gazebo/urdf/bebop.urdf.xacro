@@ -20,29 +20,11 @@
   <xacro:property name="laz_radius" value="0.04"/>
   <xacro:property name="laz_height" value="0.1"/>
   
-  <!--Laser Scan-->
-  <link name="sensor_laser">
-    <visual>
-      <geometry>
-        <mesh filename="package://bebop_gazebo/meshes/hokuyo.dae"/>
-        <!--box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/-->
-      </geometry>
-      <material name="blue"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="0.00000000001"/>
-      <inertia ixx="${(1/12) * 0.1 * (3 * base_radius * base_radius + base_height * base_height)}" ixy="0" ixz="0" iyy="${(1/12) * 0.1 * (3 * base_radius * base_radius + base_height * base_height)}" iyz="0" izz="${(1/2) * 0.1 * base_radius * base_radius}"/>
-    </inertial>
-  </link>
 
-  <joint name="sensor_laser_joint" type="fixed">
-    <origin xyz="${laser_origin_x} ${laser_origin_y} ${laser_origin_z}" rpy="0 0 0" />
-    <parent link="base_link"/>
-    <child link="sensor_laser" />
-  </joint>
+
+  <xacro:include filename="$(find ouster_os1_64)/urdf/os1_64.urdf.xacro"/>
+  <xacro:os1_64 parent="base" name="ouster" prefix="/os1_cloud_node" hz="10" samples="512">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:os1_64>
+
 </robot>
