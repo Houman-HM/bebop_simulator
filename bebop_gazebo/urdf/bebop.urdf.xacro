@@ -24,7 +24,7 @@
 
   <xacro:include filename="$(find ouster_os1_64)/urdf/os1_64.urdf.xacro"/>
   <xacro:os1_64 parent="base" name="ouster" prefix="/os1_cloud_node" hz="10" samples="512">
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="0 0 0.05" rpy="0 0 0" />
   </xacro:os1_64>
 
 </robot>
