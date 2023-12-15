@@ -22,9 +22,9 @@
   
 
 
-  <xacro:include filename="$(find ouster_os1_64)/urdf/os1_64.urdf.xacro"/>
-  <xacro:os1_64 parent="base" name="ouster" prefix="/os1_cloud_node" hz="10" samples="512">
-    <origin xyz="0 0 0.05" rpy="0 0 0" />
-  </xacro:os1_64>
+  <xacro:include filename="$(find velodyne_description)/urdf/VLP-16.urdf.xacro"/>
+  <xacro:VLP-16 parent="base_link" name="velodyne" topic="/velodyne_points" hz="50" samples="440" gpu="true">
+    <origin xyz="0 0 0.04" rpy="0 0 0" />
+  </xacro:VLP-16>
 
 </robot>
